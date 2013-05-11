@@ -5,12 +5,22 @@
 ## Dependencies 
 - [jQuery](http://jquery.com/)
 
+## Why Starmie?
+- Why not... just kidding.
+- I needed an easy to use(not necessarily simple) way to add a star rating via javascript.
+- The current offerings suffered from one or more of the following...
+  - Too feature packed. Starmie does one thing and thats it.
+  - Required some backend service to work. Starmie is just javascript, no database required.  
+  - Relied upon static image assets or were just vanilla CSS3. Starmie uses the browser star icon, nothing more.
+  - Needed to manually change existing html. With Starmie you inject the HTML, no need to update any view logic.
+
 ## How To Use
 
 1. Create a new Starmie object and give it some initial values
 2. Then extract the HTML and inject it wherever you like on your page
 3. Once rendered, call the `afterRender()` method to enable it
 4. Use the `getRating()` method to return the current star-rating
+5. Access the star-rating with jQuery by selecting on `$('.idPrefix-starmie-rating')`
 
 ```javascript
 var stars = new Starmie({
@@ -20,9 +30,13 @@ var stars = new Starmie({
   starTitle: "Thanks for using Starmie.js"
 });
 
-$('body').append(stars.getHtml());
-stars.afterRender();
-stars.getRating(); // Can be used with Ajax, within callbacks etc...
+$('body').append(stars.getHtml()); // Example of HTML injection
+
+stars.afterRender(); // Begins the rating jQuery events
+
+stars.getRating(); // Can be captured with Ajax, within callbacks etc...
+
+$('.mystars-starmie-rating'); // Gives you the <div>...</div> with the star rating
 ```
 
 ## ReadOnly mode
@@ -48,3 +62,5 @@ starTitle | string | "Click to rate, click again to reset" | Text that shows up 
 readOnly | boolean | false | Makes the stars readOnly
 readOnlyRating | number | 0 if negative or starNumber if too large | The number of stars filled in
 
+## TODO
+1. Some sort of testing, there are so many Javascript testing tools I can't decide which one to use
