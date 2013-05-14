@@ -6,11 +6,11 @@ function Starmie(paramObj) {
 	paramObj = ((typeof paramObj === "undefined") || paramObj === null || (typeof paramObj != "object")) ? {} : paramObj;
 
 	// Assign parameter object values
-	var starNumber = (typeof paramObj.starNumber === "undefined") ? 5 : paramObj.starNumber;
-	var idPrefix = (typeof paramObj.idPrefix === "undefined") ? "stars" + randNum.toString() : paramObj.idPrefix;
-	var starSize = (typeof paramObj.starSize === "undefined") ? "30px" : paramObj.starSize;
-	var starTitle = (typeof paramObj.starTitle === "undefined") ? "Click to rate, click again to reset" : paramObj.starTitle;
-	var readOnly = (typeof paramObj.readOnly === "undefined") ? false : paramObj.readOnly;
+	var starNumber  = paramObj.starNumber   || 5;
+	var idPrefix    = paramObj.idPrefix     || "stars" + randNum.toString();
+	var starSize    = paramObj.starSize     || "30px";
+	var starTitle   = paramObj.starTitle    || "Click to rate, click again to reset";
+	var readOnly    = paramObj.readOnly     || false;
 	if(readOnly) {
 		var readOnlyRating = (paramObj.readOnlyRating >= starNumber) ? starNumber : paramObj.readOnlyRating;
 		readOnlyRating = (readOnlyRating < 0 ) ? 0 : readOnlyRating;
