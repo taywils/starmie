@@ -34,68 +34,67 @@ function Starmie(paramObj) {
 	};
 
 	this.afterRender = function() {
-		if(!rendered)
+		if(!rendered) {
 			return false;
+        } else {
+            var selector = "div." + divClass + " span";
 
-		var selector = "div." + divClass + " span";
+            jQuery(selector).each(function(index) {
+                starIds.push(jQuery(this).attr('id'));
+            });
 
-		jQuery(selector).each(function(index) {
-			starIds.push(jQuery(this).attr('id'));
-		});
+            jQuery(selector).css({color: 'grey', cursor: 'pointer'});
+            jQuery(selector).attr('title', starTitle);
 
-		jQuery(selector).css({color: 'grey', cursor: 'pointer'});
-		jQuery(selector).attr('title', starTitle);
+            if(readOnly) {
+                for(idx in starIds) {
+                    if(starIds.hasOwnProperty(idx) && idx < readOnlyRating) {
+                        jQuery("#" + starIds[idx]).css('color', 'gold');
+                    }
+                }
 
-		if(readOnly) {
-			for(idx in starIds) {
-				if(starIds.hasOwnProperty(idx) && idx < readOnlyRating) {
-					jQuery("#" + starIds[idx]).css('color', 'gold');
-				}
-			}
+                theRating = readOnlyRating;
+            } else {
+                jQuery(selector).hover(
+                    function() { //onMouseOver
+                        if(!starLock) {
+                            var high = jQuery.inArray(jQuery(this).attr('id'), starIds);
+                            for(idx in starIds) {
+                                if(starIds.hasOwnProperty(idx) && idx <= high) {
+                                    jQuery("#" + starIds[idx]).css('color', 'gold');
+                                }
+                            }
+                        }
+                    },
+                    function() { //onMouseOff
+                        if(!starLock) {
+                            for(idx in starIds) {
+                                if(starIds.hasOwnProperty(idx)) {
+                                    jQuery("#" + starIds[idx]).css('color', 'grey');
+                                }
+                            }
+                        }
+                    }
+                );
 
-			theRating = readOnlyRating;
-		}
-
-		if(!readOnly) {
-			jQuery(selector).hover(
-				function() { //onMouseOver
-					if(!starLock) {
-						var high = jQuery.inArray(jQuery(this).attr('id'), starIds);
-						for(idx in starIds) {
-							if(starIds.hasOwnProperty(idx) && idx <= high) {
-								jQuery("#" + starIds[idx]).css('color', 'gold');
-							}
-						}
-					}
-				},
-				function() { //onMouseOff
-					if(!starLock) {
-						for(idx in starIds) {
-							if(starIds.hasOwnProperty(idx)) {
-								jQuery("#" + starIds[idx]).css('color', 'grey');
-							}
-						}
-					}
-				}
-			);
-
-			jQuery(selector).click(function(){
-				if(!starLock) {
-					starLock = true;
-					var rating = 0;
-					var rgbGold = "rgb(255, 215, 0)";
-					for(idx in starIds) {
-						if(starIds.hasOwnProperty(idx) && rgbGold === jQuery("#" + starIds[idx]).css('color')) {
-							rating += 1;
-						}
-					}
-					theRating = rating;
-				} else {
-					theRating = 0;
-					starLock = false;
-				}
-			});
-		}
+                jQuery(selector).click(function(){
+                    if(!starLock) {
+                        starLock = true;
+                        var rating = 0;
+                        var rgbGold = "rgb(255, 215, 0)";
+                        for(idx in starIds) {
+                            if(starIds.hasOwnProperty(idx) && rgbGold === jQuery("#" + starIds[idx]).css('color')) {
+                                rating += 1;
+                            }
+                        }
+                        theRating = rating;
+                    } else {
+                        theRating = 0;
+                        starLock = false;
+                    }
+                });
+            }
+        }
 	};
 
 	this.getRating = function() {
