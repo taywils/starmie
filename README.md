@@ -1,6 +1,6 @@
 ## Demo
 
-[See the jsFiddle](http://jsfiddle.net/uBy63/1/)
+[See the jsFiddle](http://jsfiddle.net/uBy63/2/)
 
 ## Dependencies 
 - [jQuery](http://jquery.com/)
