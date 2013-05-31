@@ -22,11 +22,12 @@ function Starmie(paramObj) {
 	var theRating = 0;
 	var divClass = idPrefix + '-starmie-rating';
 	var rendered = false;
+	var htmlStar = "&#9733;";
 
 	this.getHtml = function() {
 		var html = "<div class='" + divClass + "' style='font-size: " + starSize + ";'>\n";
 		for(var i = 0; i < starNumber; ++i) {
-			html += "<span id='" + idPrefix + "-" + i + "'>&#9733;</span>";
+			html += "<span id='" + idPrefix + "-" + i + "'>" + htmlStar + "</span>";
 		}
 		html += "\n</div>";
 		rendered = true;
@@ -37,14 +38,14 @@ function Starmie(paramObj) {
 		if(!rendered) {
 			return false;
         } else {
-            var selector = "div." + divClass + " span";
+            var $starDivs = jQuery("div." + divClass + " span");
 
-            jQuery(selector).each(function(index) {
+            $starDivs.each(function(index) {
                 starIds.push(jQuery(this).attr('id'));
             });
 
-            jQuery(selector).css({color: 'grey', cursor: 'pointer'});
-            jQuery(selector).attr('title', starTitle);
+            $starDivs.css({color: 'grey', cursor: 'pointer'});
+            $starDivs.attr('title', starTitle);
 
             if(readOnly) {
                 for(idx in starIds) {
@@ -55,7 +56,7 @@ function Starmie(paramObj) {
 
                 theRating = readOnlyRating;
             } else {
-                jQuery(selector).hover(
+                $starDivs.hover(
                     function() { //onMouseOver
                         if(!starLock) {
                             var high = jQuery.inArray(jQuery(this).attr('id'), starIds);
@@ -77,7 +78,7 @@ function Starmie(paramObj) {
                     }
                 );
 
-                jQuery(selector).click(function(){
+                $starDivs.click(function(){
                     if(!starLock) {
                         starLock = true;
                         var rating = 0;
