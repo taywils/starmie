@@ -11,6 +11,7 @@ function Starmie(paramObj) {
 	var starSize    = paramObj.starSize     || "30px";
 	var starTitle   = paramObj.starTitle    || "Click to rate, click again to reset";
 	var readOnly    = paramObj.readOnly     || false;
+	var starColor  	= paramObj.starColor    || "rgb(255, 215, 0)";
 	if(readOnly) {
 		var readOnlyRating = (paramObj.readOnlyRating >= starNumber) ? starNumber : paramObj.readOnlyRating;
 		readOnlyRating = (readOnlyRating < 0 ) ? 0 : readOnlyRating;
@@ -50,7 +51,7 @@ function Starmie(paramObj) {
             if(readOnly) {
                 for(idx in starIds) {
                     if(starIds.hasOwnProperty(idx) && idx < readOnlyRating) {
-                        jQuery("#" + starIds[idx]).css('color', 'gold');
+                        jQuery("#" + starIds[idx]).css('color', starColor);
                     }
                 }
 
@@ -62,7 +63,7 @@ function Starmie(paramObj) {
                             var high = jQuery.inArray(jQuery(this).attr('id'), starIds);
                             for(idx in starIds) {
                                 if(starIds.hasOwnProperty(idx) && idx <= high) {
-                                    jQuery("#" + starIds[idx]).css('color', 'gold');
+                                    jQuery("#" + starIds[idx]).css('color', starColor);
                                 }
                             }
                         }
@@ -82,9 +83,8 @@ function Starmie(paramObj) {
                     if(!starLock) {
                         starLock = true;
                         var rating = 0;
-                        var rgbGold = "rgb(255, 215, 0)";
                         for(idx in starIds) {
-                            if(starIds.hasOwnProperty(idx) && rgbGold === jQuery("#" + starIds[idx]).css('color')) {
+                            if(starIds.hasOwnProperty(idx) && starColor === jQuery("#" + starIds[idx]).css('color')) {
                                 rating += 1;
                             }
                         }
