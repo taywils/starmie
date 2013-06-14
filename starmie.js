@@ -1,6 +1,6 @@
 function Starmie(paramObj) {
 	//Used to generate random star ID numbers
-	var randNum = Math.floor((Math.random() * 1000) + 1);
+	var randNum = Math.floor((Math.random() * 9999) + 1);
 
 	//Ensure paramObj will always be a 'object'
 	paramObj = ((typeof paramObj === "undefined") || paramObj === null || (typeof paramObj != "object")) ? {} : paramObj;
@@ -24,6 +24,27 @@ function Starmie(paramObj) {
 	var divClass = idPrefix + '-starmie-rating';
 	var rendered = false;
 	var htmlStar = "&#9733;";
+	/**
+	 * For a given hex string returns the string equivalent in rgb
+	 * notation
+	 * @see http://stackoverflow.com/questions/5623838
+	 * @params String hex
+	 * @return String
+	 */
+	var printRgbFromHex = function(hex) {
+		if(hex[0] === '#') {
+			//Trim leading hash
+			hex = hex.substr(1, hex.length - 1);
+			var bigint = parseInt(hex, 16);
+			var r = (bigint >> 16) & 255;
+			var g = (bigint >> 8) & 255;
+			var b = bigint & 255;
+
+			return "rgb(" + r + ", " + g + ", " + b + ")";
+		} else {
+			return hex;
+		}
+	};
 
 	this.getHtml = function() {
 		var html = "<div class='" + divClass + "' style='font-size: " + starSize + ";'>\n";
@@ -84,7 +105,7 @@ function Starmie(paramObj) {
                         starLock = true;
                         var rating = 0;
                         for(idx in starIds) {
-                            if(starIds.hasOwnProperty(idx) && starColor === jQuery("#" + starIds[idx]).css('color')) {
+                            if(starIds.hasOwnProperty(idx) && printRgbFromHex(starColor) === jQuery("#" + starIds[idx]).css('color')) {
                                 rating += 1;
                             }
                         }
