@@ -7,7 +7,7 @@
 
 ## Why Starmie?
 - Why not... just kidding.
-- I needed an easy to use(not necessarily simple) way to add a star rating via javascript.
+- I needed an easy to use(not necessarily simple) library for rendering star rating via javascript.
 - The current offerings suffered from one or more of the following...
   - Too feature packed. Starmie does one thing and thats it.
   - Required some backend service to work. Starmie is just javascript, no database required.  
