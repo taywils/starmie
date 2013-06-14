@@ -1,6 +1,6 @@
 ## Demo
 
-[See the jsFiddle](http://jsfiddle.net/uBy63/2/)
+[See the jsFiddle](http://jsfiddle.net/uBy63/3/)
 
 ## Dependencies 
 - [jQuery](http://jquery.com/)
@@ -61,6 +61,7 @@ starSize | string | "30px" | How large in pixels the stars will be
 starTitle | string | "Click to rate, click again to reset" | Text that shows up when the mouse hovers
 readOnly | boolean | false | Makes the stars readOnly
 readOnlyRating | number | 0 if negative or starNumber if too large | The number of stars filled in
+starColor | String | "rgb(255, 215, 0)" | Sets the star color from a valid hex or rgb string
 
 ## TODO
 1. Some sort of testing, there are so many Javascript testing tools I can't decide which one to use
