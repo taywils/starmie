@@ -70,7 +70,7 @@ function Starmie(paramObj) {
             $starDivs.attr('title', starTitle);
 
             if(readOnly) {
-                for(idx in starIds) {
+                for(var idx in starIds) {
                     if(starIds.hasOwnProperty(idx) && idx < readOnlyRating) {
                         jQuery("#" + starIds[idx]).css('color', starColor);
                     }
@@ -82,7 +82,7 @@ function Starmie(paramObj) {
                     function() { //onMouseOver
                         if(!starLock) {
                             var high = jQuery.inArray(jQuery(this).attr('id'), starIds);
-                            for(idx in starIds) {
+                            for(var idx in starIds) {
                                 if(starIds.hasOwnProperty(idx) && idx <= high) {
                                     jQuery("#" + starIds[idx]).css('color', starColor);
                                 }
@@ -91,7 +91,7 @@ function Starmie(paramObj) {
                     },
                     function() { //onMouseOff
                         if(!starLock) {
-                            for(idx in starIds) {
+                            for(var idx in starIds) {
                                 if(starIds.hasOwnProperty(idx)) {
                                     jQuery("#" + starIds[idx]).css('color', 'grey');
                                 }
@@ -104,7 +104,7 @@ function Starmie(paramObj) {
                     if(!starLock) {
                         starLock = true;
                         var rating = 0;
-                        for(idx in starIds) {
+                        for(var idx in starIds) {
                             if(starIds.hasOwnProperty(idx) && printRgbFromHex(starColor) === jQuery("#" + starIds[idx]).css('color')) {
                                 rating += 1;
                             }
